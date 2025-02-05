@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form">
+      <input id ="name" type="text" placeholder="username" required/><br /><br>
+      <input id="email" type="text" placeholder="email" required/><br><br>
+      <button type="submit">submit</button>
+      <p id="text"></p>
+    </form>
+
+    <script>
+      let form = document.getElementById("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let name = e.target[0].value;
+        let email = e.target[1].value;
+        let userdetails = { username: name, email: email };
+
+        localStorage.setItem("userInfo", JSON.stringify(userdetails));
+        
+        let existingData = JSON.parse(localStorage.getItem("userInfo"));
+        console.log(existingData);
+
+        let card = document.createElement("div");
+        card.style.backgroundColor = "lightpink";
+        card.style.border = "2px solid black";
+        card.style.borderRadius = "10px";
+        card.style.width = "300px";
+        
+        let username = document.createElement("h1");
+        let useremail = document.createElement("p");
+        
+        username.innerHTML = existingData.username;
+        useremail.innerHTML = existingData.email;
+        
+        card.append(username, useremail);
+        document.body.append(card);
+      });
+
+      let existingData = JSON.parse(localStorage.getItem("userInfo")) || [];
+      // Push new data into existing data
+      // existingData.push(userdetails);  // This line is redundant and incorrect in this context
+      let stringifieddata = JSON.stringify(existingData);
+      localStorage.setItem("userInfo", stringifieddata);
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form">
+      <input id ="name" type="text" placeholder="username"  required/><br /><br>
+      <input id = "email" type="text"  placeholder="email" required/><br><br>
+      <button type = "submit">submit</button>
+      <p id = "text  "></p>
+    </form>
+
+    <script>
+      let form = document.getElementById("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(e.target[0].value, e.target[1].value);
+        let name = e.target[0].value;
+        let email = e.target[1].value;
+        let userdetails = { username: name, email: email };
+        localStorage.setItem("userInfo",JSON.stringify(userdetails))
+        let existingData = localStorage.getItem("userinfo");
+        let parsedData = JSON.parse(existingData);
+        console.log(parsedData);
+
+        let card = document.createElement("div");
+        card.style.backgroundColor = "lightpink";
+        card.style.border="2px solid black";
+        card.style.borderRadius="10px";
+        card.style.width="300px"
+        let username = document.createElement("h1");
+        let useremail = document.createElement("p");
+        username.innerHTML = parsedData.username;
+        useremail.innerHTML = parsedData.email;
+        card.append(username, useremail);
+        document.body.append(card);
+      });
+      let existingData = JSON.parse(localStorage.getItem("userinfo")) || [];
+      existingData.push(userdetails)
+      let stringifieddata=JSON.stringify(existingData)
+      localStorage.setItem("userInfo",stringifieddata)
+    </script>
+  </body>
+</html> -->
